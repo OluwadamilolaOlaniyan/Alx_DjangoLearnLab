@@ -115,6 +115,8 @@ USE_TZ = True
 #Use of Custom User Model
 AUTH_USER_MODEL = "relationship_app.CustomUser"
 
+AUTH_USER_MODEL = "bookshelf.CustomUser"
+
 
 
 # Static files (CSS, JavaScript, Images)
