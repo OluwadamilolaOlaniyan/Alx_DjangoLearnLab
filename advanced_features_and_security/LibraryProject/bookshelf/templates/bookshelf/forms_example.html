@@ -1,0 +1,6 @@
+
+Contact Form
+{% if success %}
+Form submitted successfully!
+
+{% endif %} {% csrf_token %} {{ form.as_p }}
