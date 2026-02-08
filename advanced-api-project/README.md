@@ -33,3 +33,18 @@ Search books by title or author name:
 Order results by title or publication year:
 - /api/books/?ordering=title
 - /api/books/?ordering=-publication_year
+
+## API Testing
+
+Unit tests are written in api/test_views.py using Django REST Framework's
+APITestCase.
+
+### What is Tested
+- CRUD operations for Book endpoints
+- Filtering, searching, and ordering
+- Authentication and permission enforcement
+
+### How to Run Tests
+```bash
+python manage.py test api
+
