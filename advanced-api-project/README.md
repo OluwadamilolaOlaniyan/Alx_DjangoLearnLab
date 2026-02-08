@@ -14,3 +14,22 @@ Write operations require authentication.
 ### Validation
 Custom validation is handled in BookSerializer to ensure
 publication_year is not set in the future.
+
+
+## Filtering, Searching, and Ordering
+
+The BookListView supports advanced querying features.
+
+### Filtering
+Filter books by title, publication year, or author:
+- /api/books/?publication_year=1958
+- /api/books/?author=1
+
+### Searching
+Search books by title or author name:
+- /api/books/?search=Achebe
+
+### Ordering
+Order results by title or publication year:
+- /api/books/?ordering=title
+- /api/books/?ordering=-publication_year
