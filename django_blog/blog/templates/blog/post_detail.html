@@ -22,7 +22,10 @@
 <h3>Comments</h3>
 
 {% for comment in object.comments.all %}
-    <p><strong>{{ comment.author }}</strong> ({{ comment.created_at }})</p>
+    <p>
+        <strong>{{ comment.author }}</strong>
+        ({{ comment.created_at }})
+    </p>
     <p>{{ comment.content }}</p>
 
     {% if user == comment.author %}
@@ -35,12 +38,9 @@
 {% endfor %}
 
 {% if user.is_authenticated %}
-    <h4>Add Comment</h4>
-    <form method="POST" action="{% url 'comment-add' object.pk %}">
-        {% csrf_token %}
-        {{ comment_form.as_p }}
-        <button type="submit">Post Comment</button>
-    </form>
+    <a href="{% url 'comment-add' object.pk %}">
+        Add Comment
+    </a>
 {% else %}
     <p>You must be logged in to comment.</p>
 {% endif %}
