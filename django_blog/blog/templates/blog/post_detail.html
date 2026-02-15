@@ -53,3 +53,14 @@ class PostDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['comment_form'] = CommentForm()
         return context
+<p>
+    <strong>Tags:</strong>
+    {% for tag in object.tags.all %}
+        <a href="{% url 'tag-posts' tag.name %}">
+            {{ tag.name }}
+        </a>
+    {% empty %}
+        No tags
+    {% endfor %}
+</p>
+
