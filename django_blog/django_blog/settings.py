@@ -82,14 +82,11 @@ WSGI_APPLICATION = 'django_blog.wsgi.application'
 # }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv('DB_NAME', 'blog_db'),
-        'USER': os.getenv('USER'),        # 👈 USER
-        'PASSWORD': os.getenv('PASSWORD'),
-        'HOST': os.getenv('HOST', 'localhost'),
-        'PORT': os.getenv('PORT', '5432'), # 👈 PORT
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 
 
 # Password validation
@@ -132,3 +129,6 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
+LOGIN_REDIRECT_URL = "profile"
+LOGOUT_REDIRECT_URL = "login"
+LOGIN_URL = "login"
