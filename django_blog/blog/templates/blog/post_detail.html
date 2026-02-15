@@ -56,7 +56,7 @@ class PostDetailView(DetailView):
 <p>
     <strong>Tags:</strong>
     {% for tag in object.tags.all %}
-        <a href="{% url 'tag-posts' tag.name %}">
+        <a href="{% url 'tag-posts' tag.slug %}">
             {{ tag.name }}
         </a>
     {% empty %}
