@@ -21,9 +21,7 @@ class UpdateUserForm(forms.ModelForm):
         model = User
         fields = ["username", "email"]
         
-class PostForm(forms.ModelForm):
-    tags = forms.CharField(required=False, help_text="Enter tags separated by commas")
-    
+class PostForm(forms.ModelForm):   
     class Meta:
         model = Post
         fields = ['title', 'content']
