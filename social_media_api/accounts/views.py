@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated
 from django.shortcuts import get_object_or_404
-
+from django.contrib.auth import authenticate
 
 CustomUser = get_user_model()
 
@@ -33,7 +33,26 @@ class RegisterView(generics.GenericAPIView):
             "token": token.key
         }, status=status.HTTP_201_CREATED)
 
+class LoginView(generics.GenericAPIView):
+    queryset = CustomUser.objects.all()
 
+    def post(self, request):
+        username = request.data.get("username")
+        password = request.data.get("password")
+
+        user = authenticate(username=username, password=password)
+
+        if not user:
+            return Response(
+                {"error": "Invalid credentials"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        token, created = Token.objects.get_or_create(user=user)
+
+        return Response({
+            "token": token.key
+        })
 
 class FollowUserView(generics.GenericAPIView):
     permission_classes = [permissions.IsAuthenticated]
@@ -61,3 +80,14 @@ class UnfollowUserView(generics.GenericAPIView):
         request.user.following.remove(user_to_unfollow)
 
         return Response({"message": "User unfollowed successfully"})
+    
+class ProfileView(generics.GenericAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    queryset = CustomUser.objects.all()
+
+    def get(self, request):
+        return Response({
+            "id": request.user.id,
+            "username": request.user.username,
+            "email": request.user.email,
+        })
